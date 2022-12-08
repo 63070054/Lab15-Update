@@ -6,12 +6,9 @@ import com.proto.maxscore.MaxScoreResponse;
 import io.grpc.stub.StreamObserver;
 
 public class MaxScoreServiceImpl extends MaxScoreGrpc.MaxScoreImplBase {
-
     private int maxScore = 0;
     @Override
     public StreamObserver<MaxScoreRequest> findMaxScore(StreamObserver<MaxScoreResponse> responseObserver) {
-
-
         StreamObserver<MaxScoreRequest> stream = new StreamObserver<MaxScoreRequest>() {
             @Override
             public void onNext(MaxScoreRequest request) {

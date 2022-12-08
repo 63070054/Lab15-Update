@@ -11,15 +11,12 @@ import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
 public class MaxScoreClient {
-
     public static void main(String[] args) {
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052)
                 .usePlaintext()
                 .build();
-
         MaxScoreGrpc.MaxScoreStub asyncClient = MaxScoreGrpc.newStub(channel);
         CountDownLatch latch = new CountDownLatch(1);
-
         StreamObserver<MaxScoreRequest> stream = asyncClient.findMaxScore(new StreamObserver<MaxScoreResponse>() {
             @Override
             public void onNext(MaxScoreResponse value) {
@@ -41,7 +38,7 @@ public class MaxScoreClient {
             Scanner scanner = new Scanner(System.in);
             int scoreInput = scanner.nextInt();
             if(scoreInput == -1){
-                break;
+                channel.shutdown();
             } else {
                 MaxScoreRequest request = MaxScoreRequest.newBuilder()
                         .setScore(scoreInput)

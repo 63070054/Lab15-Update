@@ -13,4 +13,3 @@ message PrimeFactoryResponse {
 service PrimeFactory {
   rpc PrimeDecomposition (PrimeFactoryRequest) returns (stream PrimeFactoryResponse) {};
 }
-
